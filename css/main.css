@@ -76,12 +76,21 @@ body {
 /* layout */
 
 body {
+  display: -webkit-flex;
+  display: -moz-flex;
   display: flex;
+
+  -webkit-direction: column;
+  -moz-direction: column;
   flex-direction: column;
+
+
   min-height: 100vh;
 }
 
 main {
+  -webkit-flex: 1;
+  -moz-flex: 1;
   flex: 1;
 }
 
@@ -98,6 +107,38 @@ main {
 }
 .box-shadow-outset:hover, .box-shadow-outset:focus, .box-shadow-outset:active {
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+}
+
+.name {
+  margin-bottom: 0;
+}
+
+.title {
+  margin-top: 0;
+}
+
+h1 {
+  font: 400 2em 'Bree Serif', Georgia, serif;
+}
+
+h2 {
+  font: 400 1.5em 'Bree Serif', Georgia, serif;
+}
+
+h3 {
+  font: 400 1.17em 'Bree Serif', Georgia, serif;
+}
+
+h4 {
+  font: 400 1em 'Bree Serif', Georgia, serif;
+}
+ 
+p, span {
+  font: 400 14px/1.6 'Open Sans', Verdana, Helvetica, sans-serif;
+}
+
+hr {
+  width: 100%;
 }
 
 /***
