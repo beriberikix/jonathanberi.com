@@ -98,7 +98,7 @@ body {
   background-image: url(../img/sos.png);
 }
 
-@media (max-width: 799px) {
+@media (max-width: 649px) {
   .gridwrapper {
     display: flex;
     flex-flow: column nowrap;
@@ -119,7 +119,7 @@ body {
   }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 750px) {
   .gridwrapper {
     display: flex;
     flex-flow: row nowrap;
