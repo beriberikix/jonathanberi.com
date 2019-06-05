@@ -137,6 +137,7 @@ body {
   .details {
     margin-left: 20px;
     flex-shrink: 1;
+    margin-right: 20px;
   }
 }
 
@@ -153,6 +154,7 @@ img {
 .details {
   margin-left: 20px;
   flex-shrink: 1;
+  margin-right: 20px;
 }
 
 .name {
