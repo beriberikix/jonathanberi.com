@@ -38,7 +38,20 @@ const { experience, earlier } = profile;
       }
     </ol>
 
-    <p class="xp__earlier reveal">{earlier}</p>
+    <div class="xp__earlier reveal">
+      <p class="xp__earlier-label">Earlier</p>
+      <ul class="xp__earlier-list">
+        {
+          earlier.map((job) => (
+            <li class="xp__earlier-item">
+              <span class="xp__earlier-org">{job.org}</span>
+              <span class="xp__earlier-role">{job.role}</span>
+              <span class="xp__earlier-period">{job.period}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -118,6 +131,7 @@ const { experience, earlier } = profile;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.6rem;
+    text-wrap: balance;
   }
   .xp__tag {
     font-family: var(--font-mono);
@@ -136,6 +150,7 @@ const { experience, earlier } = profile;
     color: var(--ink);
     max-width: var(--measure);
     margin-top: 0.4rem;
+    text-wrap: pretty;
   }
 
   .xp__points {
@@ -162,12 +177,58 @@ const { experience, earlier } = profile;
   }
 
   .xp__earlier {
-    margin-top: clamp(2rem, 4vw, 3rem);
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
     padding-top: clamp(1.5rem, 3vw, 2rem);
     border-top: 1px solid var(--line);
-    color: var(--ink-faint);
+  }
+  .xp__earlier-label {
+    font-family: var(--font-mono);
     font-size: var(--step--1);
-    max-width: var(--measure);
-    line-height: 1.7;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1rem;
+  }
+  .xp__earlier-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+  }
+  .xp__earlier-item {
+    display: grid;
+    grid-template-columns: minmax(7rem, auto) 1fr auto;
+    align-items: baseline;
+    gap: 0.4rem 1.5rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .xp__earlier-item:last-child {
+    border-bottom: none;
+  }
+  .xp__earlier-org {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .xp__earlier-role {
+    color: var(--ink-soft);
+    text-wrap: pretty;
+  }
+  .xp__earlier-period {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  @media (max-width: 560px) {
+    .xp__earlier-item {
+      grid-template-columns: 1fr auto;
+    }
+    .xp__earlier-role {
+      grid-column: 1 / -1;
+      order: 3;
+    }
   }
 </style>
