@@ -1,12 +1,12 @@
 /* ============================================================
    Design tokens
-   Near-monochrome canvas + one warm "sand" accent.
+   Cool editorial canvas + one deep emerald accent.
    Dark mode is a first-class look; defaults to system.
    ============================================================ */
 
 :root {
   /* Type */
-  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
@@ -30,70 +30,71 @@
   --radius: 14px;
   --border-w: 1px;
 
-  /* Light palette */
-  --bg: #f7f4ef;
-  --bg-tint: #f1ece4;
-  --surface: #fffdf9;
-  --ink: #1a1815;
-  --ink-soft: #5b554c;
-  --ink-faint: #8c857a;
-  --line: #e3ddd2;
-  --line-strong: #cdc5b6;
-  --accent: #c8612b;
-  --accent-soft: rgba(200, 97, 43, 0.12);
-  --accent-ink: #a64d1e;
-  --dot: rgba(26, 24, 21, 0.16);
-  --shadow: 0 1px 2px rgba(26, 24, 21, 0.04), 0 12px 32px -16px rgba(26, 24, 21, 0.18);
+  /* Light palette — cool gray paper, deep emerald accent */
+  --bg: #f1f3f1;
+  --bg-tint: #e8ebe8;
+  --surface: #fbfcfb;
+  --ink: #16191c;
+  --ink-soft: #515a5b;
+  --ink-faint: #828b8b;
+  --line: #e0e3df;
+  --line-strong: #c7ccc6;
+  --accent: #1f7a5c;
+  --accent-soft: rgba(31, 122, 92, 0.12);
+  --accent-ink: #1a6b50;
+  --dot: rgba(22, 25, 28, 0.16);
+  --shadow: 0 1px 2px rgba(22, 25, 28, 0.04), 0 12px 32px -16px rgba(22, 25, 28, 0.16);
 }
 
+/* Dark palette — cool slate, brighter emerald */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0e0d0c;
-    --bg-tint: #15130f;
-    --surface: #1a1815;
-    --ink: #f3efe7;
-    --ink-soft: #b3ab9d;
-    --ink-faint: #7d7568;
-    --line: #2a2722;
-    --line-strong: #3b372f;
-    --accent: #f08a4b;
-    --accent-soft: rgba(240, 138, 75, 0.14);
-    --accent-ink: #f4a06b;
-    --dot: rgba(243, 239, 231, 0.14);
+    --bg: #101316;
+    --bg-tint: #161a1d;
+    --surface: #1a1f22;
+    --ink: #e9edea;
+    --ink-soft: #a4adac;
+    --ink-faint: #6e7876;
+    --line: #262c2e;
+    --line-strong: #373d3f;
+    --accent: #34c08e;
+    --accent-soft: rgba(52, 192, 142, 0.15);
+    --accent-ink: #57cfa1;
+    --dot: rgba(233, 237, 234, 0.14);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 20px 48px -24px rgba(0, 0, 0, 0.7);
   }
 }
 
 /* Manual theme override via [data-theme] (toggle) */
 :root[data-theme='dark'] {
-  --bg: #0e0d0c;
-  --bg-tint: #15130f;
-  --surface: #1a1815;
-  --ink: #f3efe7;
-  --ink-soft: #b3ab9d;
-  --ink-faint: #7d7568;
-  --line: #2a2722;
-  --line-strong: #3b372f;
-  --accent: #f08a4b;
-  --accent-soft: rgba(240, 138, 75, 0.14);
-  --accent-ink: #f4a06b;
-  --dot: rgba(243, 239, 231, 0.14);
+  --bg: #101316;
+  --bg-tint: #161a1d;
+  --surface: #1a1f22;
+  --ink: #e9edea;
+  --ink-soft: #a4adac;
+  --ink-faint: #6e7876;
+  --line: #262c2e;
+  --line-strong: #373d3f;
+  --accent: #34c08e;
+  --accent-soft: rgba(52, 192, 142, 0.15);
+  --accent-ink: #57cfa1;
+  --dot: rgba(233, 237, 234, 0.14);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 20px 48px -24px rgba(0, 0, 0, 0.7);
 }
 :root[data-theme='light'] {
-  --bg: #f7f4ef;
-  --bg-tint: #f1ece4;
-  --surface: #fffdf9;
-  --ink: #1a1815;
-  --ink-soft: #5b554c;
-  --ink-faint: #8c857a;
-  --line: #e3ddd2;
-  --line-strong: #cdc5b6;
-  --accent: #c8612b;
-  --accent-soft: rgba(200, 97, 43, 0.12);
-  --accent-ink: #a64d1e;
-  --dot: rgba(26, 24, 21, 0.16);
-  --shadow: 0 1px 2px rgba(26, 24, 21, 0.04), 0 12px 32px -16px rgba(26, 24, 21, 0.18);
+  --bg: #f1f3f1;
+  --bg-tint: #e8ebe8;
+  --surface: #fbfcfb;
+  --ink: #16191c;
+  --ink-soft: #515a5b;
+  --ink-faint: #828b8b;
+  --line: #e0e3df;
+  --line-strong: #c7ccc6;
+  --accent: #1f7a5c;
+  --accent-soft: rgba(31, 122, 92, 0.12);
+  --accent-ink: #1a6b50;
+  --dot: rgba(22, 25, 28, 0.16);
+  --shadow: 0 1px 2px rgba(22, 25, 28, 0.04), 0 12px 32px -16px rgba(22, 25, 28, 0.16);
 }
 
 /* ============================================================
