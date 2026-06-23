@@ -1,0 +1,252 @@
+---
+import { profile } from '../data/profile';
+import SignalField from './SignalField.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+const { name, tagline, kicker, focusAreas, currentRole, founderLine, location, headshot, links } =
+  profile;
+---
+
+<header class="hero">
+  <SignalField />
+
+  <div class="shell hero__inner">
+    <nav class="hero__nav">
+      <a class="wordmark" href="/">
+        <span class="wordmark__dot"></span>{name}
+      </a>
+      <ThemeToggle />
+    </nav>
+
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <p class="kicker">
+          {kicker}
+          <span class="kicker__focus">{focusAreas.join('  ·  ')}</span>
+        </p>
+
+        <h1 class="hero__statement">{tagline}</h1>
+
+        <p class="hero__role">
+          <a href={currentRole.href} target="_blank" rel="noopener">{currentRole.title} @ {currentRole.org}</a>
+          <span class="hero__sep">/</span>
+          <span class="hero__founder">{founderLine}</span>
+        </p>
+
+        <div class="hero__meta">
+          <span class="hero__loc">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z" stroke="currentColor" stroke-width="1.7"/>
+              <circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.7"/>
+            </svg>
+            {location}
+          </span>
+
+          <ul class="hero__links" aria-label="Profiles">
+            <li><a href={links.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href={links.github} target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href={links.bluesky} target="_blank" rel="noopener">Bluesky</a></li>
+            <li><a href={links.email}>Email</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="hero__portrait">
+        <picture>
+          <source srcset={headshot.webp} type="image/webp" />
+          <source srcset={headshot.jpg} type="image/jpeg" />
+          <img src={headshot.jpg} alt={headshot.alt} width="420" height="420" fetchpriority="high" />
+        </picture>
+        <span class="hero__portrait-tag">— now</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--bg-tint), var(--bg));
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    padding-block: clamp(1.4rem, 3vw, 2rem) clamp(3rem, 8vw, 6rem);
+  }
+
+  .hero__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: clamp(2.5rem, 9vw, 6rem);
+  }
+
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+  .wordmark__dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1.55fr 0.85fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.04em;
+    color: var(--accent-ink);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 1rem;
+    margin-bottom: 1.4rem;
+  }
+  .kicker__focus {
+    color: var(--ink-faint);
+    letter-spacing: 0.02em;
+  }
+
+  .hero__statement {
+    font-size: var(--step-4);
+    font-weight: 460;
+    letter-spacing: -0.025em;
+    max-width: 16ch;
+  }
+
+  .hero__role {
+    margin-top: clamp(1.5rem, 3vw, 2.2rem);
+    font-size: var(--step-1);
+    line-height: 1.45;
+    max-width: 34ch;
+  }
+  .hero__role a {
+    color: var(--ink);
+    box-shadow: inset 0 -0.5em 0 var(--accent-soft);
+    transition: box-shadow 0.2s ease, color 0.2s ease;
+  }
+  .hero__role a:hover {
+    color: var(--accent);
+    box-shadow: inset 0 -0.7em 0 var(--accent-soft);
+  }
+  .hero__sep {
+    color: var(--line-strong);
+    margin-inline: 0.5rem;
+  }
+  .hero__founder {
+    color: var(--ink-soft);
+  }
+
+  .hero__meta {
+    margin-top: clamp(1.8rem, 4vw, 2.6rem);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.8rem 1.8rem;
+  }
+  .hero__loc {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: var(--step--1);
+    color: var(--ink-soft);
+  }
+  .hero__loc svg {
+    color: var(--accent);
+  }
+
+  .hero__links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.2rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+  }
+  .hero__links a {
+    color: var(--ink-soft);
+    position: relative;
+    transition: color 0.2s ease;
+  }
+  .hero__links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .hero__links a:hover {
+    color: var(--accent);
+  }
+  .hero__links a:hover::after {
+    transform: scaleX(1);
+  }
+
+  .hero__portrait {
+    position: relative;
+    justify-self: end;
+    width: min(100%, 340px);
+  }
+  .hero__portrait picture,
+  .hero__portrait img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 1px solid var(--line-strong);
+    box-shadow: var(--shadow);
+    filter: grayscale(0.18) contrast(1.02);
+  }
+  .hero__portrait-tag {
+    position: absolute;
+    bottom: -0.7rem;
+    left: -0.7rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    box-shadow: var(--shadow);
+  }
+
+  @media (max-width: 760px) {
+    .hero__grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .hero__portrait {
+      order: -1;
+      justify-self: start;
+      width: min(60%, 220px);
+    }
+    .hero__statement {
+      max-width: 18ch;
+    }
+  }
+</style>

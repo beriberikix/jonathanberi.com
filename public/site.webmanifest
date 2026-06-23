@@ -1,0 +1,16 @@
+{
+  "short_name": "J. Beri",
+  "name": "Jonathan Beri",
+  "description": "Product & Strategy Executive — Edge AI, Physical AI, Edge Computing.",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0e0d0c",
+  "theme_color": "#0e0d0c"
+}
