@@ -85,9 +85,16 @@ export const profile = {
     },
   ],
 
-  // De-emphasized earlier roles — a single light line.
-  earlier:
-    'Earlier: Product at WeWork’s Core Platform · Senior Technical PM at Magento · Senior PM at MySpace, where I shipped one of the world’s earliest OpenID Connect / OAuth2 implementations.',
+  // De-emphasized earlier roles — a compact, structured list.
+  earlier: [
+    { org: 'WeWork', role: 'Product, Core Platform', period: '2019 — 2020' },
+    { org: 'Magento', role: 'Senior Technical PM', period: '2010 — 2011' },
+    {
+      org: 'MySpace',
+      role: 'Senior PM — early OpenID Connect / OAuth2',
+      period: '2008 — 2010',
+    },
+  ],
 
   // Airy inline chips — not a competency matrix.
   competencies: [
