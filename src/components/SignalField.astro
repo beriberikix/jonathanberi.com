@@ -1,0 +1,101 @@
+---
+// Build-time-generated "sand -> internet" motif.
+// Left edge: scattered, faint dots (grains of sand).
+// Right edge: dots snap to a grid and link up (an ordered network).
+// Pure SVG, computed at build time -> zero client JS, no layout cost.
+
+const W = 1200;
+const H = 520;
+const cols = 26;
+const rows = 11;
+const gapX = W / (cols - 1);
+const gapY = H / (rows - 1);
+
+// Deterministic pseudo-random so the build is stable.
+let seed = 1337;
+function rnd() {
+  seed = (seed * 1103515245 + 12345) & 0x7fffffff;
+  return seed / 0x7fffffff;
+}
+
+type Dot = { x: number; y: number; r: number; o: number; order: number };
+const dots: Dot[] = [];
+
+for (let c = 0; c < cols; c++) {
+  for (let r = 0; r < rows; r++) {
+    // order: 0 (chaotic sand) on the left -> 1 (ordered net) on the right
+    const order = c / (cols - 1);
+    const jitter = (1 - order) * gapX * 0.85;
+    const x = c * gapX + (rnd() - 0.5) * jitter;
+    const y = r * gapY + (rnd() - 0.5) * (1 - order) * gapY * 0.85;
+    // drop some dots on the sandy side for sparseness
+    if (order < 0.45 && rnd() > 0.55 + order) continue;
+    const o = 0.18 + order * 0.62;
+    const radius = 1.4 + order * 1.7;
+    dots.push({ x, y, r: radius, o, order });
+  }
+}
+
+// Connecting lines only emerge on the ordered (right) side.
+type Line = { x1: number; y1: number; x2: number; y2: number; o: number };
+const lines: Line[] = [];
+for (let i = 0; i < dots.length; i++) {
+  const a = dots[i];
+  if (a.order < 0.55) continue;
+  for (let j = i + 1; j < dots.length; j++) {
+    const b = dots[j];
+    if (b.order < 0.55) continue;
+    const dx = a.x - b.x;
+    const dy = a.y - b.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < gapX * 1.25 && rnd() > 0.45) {
+      lines.push({ x1: a.x, y1: a.y, x2: b.x, y2: b.y, o: 0.1 + a.order * 0.16 });
+    }
+  }
+}
+---
+
+<svg
+  class="signal-field"
+  viewBox={`0 0 ${W} ${H}`}
+  preserveAspectRatio="xMidYMid slice"
+  aria-hidden="true"
+  focusable="false"
+>
+  <g stroke="var(--accent)" stroke-width="1">
+    {lines.map((l) => (
+      <line x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke-opacity={l.o} />
+    ))}
+  </g>
+  <g>
+    {dots.map((d) => (
+      <circle
+        cx={d.x}
+        cy={d.y}
+        r={d.r}
+        fill={d.order > 0.62 ? 'var(--accent)' : 'var(--dot)'}
+        fill-opacity={d.o}
+      />
+    ))}
+  </g>
+</svg>
+
+<style>
+  .signal-field {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    /* Fade the field into the page so it reads as texture, not graphic. */
+    -webkit-mask-image: radial-gradient(
+      120% 100% at 100% 30%,
+      #000 0%,
+      #000 45%,
+      transparent 92%
+    );
+    mask-image: radial-gradient(120% 100% at 100% 30%, #000 0%, #000 45%, transparent 92%);
+    opacity: 0.9;
+  }
+</style>

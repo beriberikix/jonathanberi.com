@@ -1,0 +1,22 @@
+---
+import { profile } from '../data/profile';
+const { beyond } = profile;
+---
+
+<section class="section" id="beyond" aria-label="Beyond work">
+  <div class="shell">
+    <p class="section__label">Off the clock</p>
+    <div class="beyond reveal prose">
+      {beyond.map((p) => <p>{p}</p>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .beyond p {
+    font-size: var(--step-1);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: var(--measure);
+  }
+</style>

@@ -1,0 +1,173 @@
+---
+import { profile } from '../data/profile';
+const { experience, earlier } = profile;
+---
+
+<section class="section" id="work" aria-label="Selected work">
+  <div class="shell">
+    <p class="section__label">Selected work</p>
+
+    <ol class="xp">
+      {
+        experience.map((job, i) => (
+          <li class="xp__item reveal" style={`--reveal-delay: ${i * 80}ms`}>
+            <div class="xp__head">
+              <h3 class="xp__org">
+                <a href={job.href} target="_blank" rel="noopener">{job.org}</a>
+              </h3>
+              <span class="xp__period">
+                {job.current && <span class="xp__live" aria-hidden="true" />}
+                {job.period}
+              </span>
+            </div>
+
+            <p class="xp__role">
+              {job.role}
+              {job.note && <span class="xp__tag">{job.note}</span>}
+            </p>
+
+            <p class="xp__lede">{job.lede}</p>
+
+            <ul class="xp__points">
+              {job.points.map((pt) => (
+                <li>{pt}</li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+
+    <p class="xp__earlier reveal">{earlier}</p>
+  </div>
+</section>
+
+<style>
+  .xp {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+  .xp__item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding-bottom: clamp(2rem, 4vw, 3rem);
+    border-bottom: 1px dashed var(--line-strong);
+  }
+  .xp:last-child {
+    /* keep spacing tidy */
+  }
+  .xp__item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .xp__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .xp__org {
+    font-size: var(--step-2);
+  }
+  .xp__org a {
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-size: 0% 1.5px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s ease, color 0.2s ease;
+  }
+  .xp__org a:hover {
+    color: var(--accent);
+    background-size: 100% 1.5px;
+  }
+  .xp__period {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .xp__live {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .xp__live { animation: none; }
+  }
+
+  .xp__role {
+    font-weight: 600;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .xp__tag {
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    background: var(--accent-soft);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+  }
+
+  .xp__lede {
+    font-size: var(--step-1);
+    color: var(--ink);
+    max-width: var(--measure);
+    margin-top: 0.4rem;
+  }
+
+  .xp__points {
+    list-style: none;
+    padding: 0;
+    margin: 0.9rem 0 0;
+    display: grid;
+    gap: 0.6rem;
+    max-width: var(--measure);
+  }
+  .xp__points li {
+    position: relative;
+    padding-left: 1.4rem;
+    color: var(--ink-soft);
+  }
+  .xp__points li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.68em;
+    width: 0.5rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .xp__earlier {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding-top: clamp(1.5rem, 3vw, 2rem);
+    border-top: 1px solid var(--line);
+    color: var(--ink-faint);
+    font-size: var(--step--1);
+    max-width: var(--measure);
+    line-height: 1.7;
+  }
+</style>

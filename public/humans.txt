@@ -1,0 +1,14 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# AUTHOR
+
+    Jonathan Beri
+    San Francisco, California
+    https://www.linkedin.com/in/jonathanberi
+
+# TECHNOLOGY COLOPHON
+
+    Astro, HTML5, CSS3
+    Fraunces, Inter & IBM Plex Mono (Google Fonts)
+    Deployed on GitHub Pages

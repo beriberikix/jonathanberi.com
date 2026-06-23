@@ -1,0 +1,94 @@
+---
+import { profile } from '../data/profile';
+const { competencies, recognition } = profile;
+---
+
+<section class="section" id="focus" aria-label="Focus and recognition">
+  <div class="shell focus__grid">
+    <div class="focus__col reveal">
+      <p class="section__label">What I do</p>
+      <ul class="chips">
+        {competencies.map((c) => <li class="chip">{c}</li>)}
+      </ul>
+    </div>
+
+    <div class="focus__col reveal" style="--reveal-delay: 120ms">
+      <p class="section__label">Board, advisory &amp; recognition</p>
+      <ul class="rec">
+        {
+          recognition.map((r) => (
+            <li class="rec__item">
+              <span class="rec__label">{r.label}</span>
+              {r.detail && <span class="rec__detail">{r.detail}</span>}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .focus__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .chips {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .chip {
+    font-size: var(--step--1);
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    padding: 0.45rem 0.95rem;
+    background: var(--surface);
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+  .chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .rec {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+  }
+  .rec__item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .rec__item:last-child {
+    border-bottom: none;
+  }
+  .rec__label {
+    color: var(--ink);
+  }
+  .rec__detail {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 760px) {
+    .focus__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
