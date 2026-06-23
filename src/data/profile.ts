@@ -126,7 +126,6 @@ export const profile = {
   ],
 
   links: {
-    email: 'mailto:jmberi@gmail.com',
     linkedin: 'https://www.linkedin.com/in/jonathanberi',
     github: 'https://github.com/beriberikix',
     bluesky: 'https://bsky.app/profile/jonathanberi.com',
