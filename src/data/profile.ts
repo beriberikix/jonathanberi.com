@@ -61,7 +61,7 @@ export const profile = {
         'Raised $8M+ and managed full P&L: budgets, headcount, investor reporting, and runway across multiple fundraising cycles.',
         'Defined the architecture connecting constrained devices to the cloud: managed connectivity, OTA, and data pipelines, the substrate increasingly central to Edge and Physical AI.',
         'Built the developer-relations function from zero: SDKs, documentation, tutorials, and community programs, the adoption engine across the embedded and edge developer ecosystem.',
-        'Structured partnerships across leading semiconductor vendors, then negotiated and closed the acquisition and led integration. Member of the Zephyr Project Technical Steering Committee.',
+        'Structured partnerships across leading semiconductor vendors, then negotiated and closed the acquisition and led integration. Served on the Zephyr Project Technical Steering Committee.',
       ],
     },
     {
@@ -116,7 +116,10 @@ export const profile = {
   recognition: [
     { label: 'Fellow, Conduit Venture Labs', detail: '2023 – now' },
     { label: 'Board of Directors, Thread Group', detail: '2016 – 2017' },
-    { label: 'Technical Steering & Marketing Committees, Zephyr Project' },
+    {
+      label: 'Silver-member representative, Zephyr Project',
+      detail: 'formerly Technical Steering & Marketing Committees',
+    },
     { label: 'Author, Make: JavaScript Robotics', detail: 'Maker Media / O’Reilly' },
     { label: 'Frequent speaker on embedded, edge & developer platforms' },
   ],
