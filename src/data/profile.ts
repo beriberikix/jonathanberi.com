@@ -46,7 +46,7 @@ export const profile = {
       lede: 'Leading global product strategy for the embedded and edge portfolio — the OS layer beneath much of the edge-AI ecosystem.',
       points: [
         'Own product across Ubuntu Core, Ubuntu Pro for Devices, and Golioth — the foundation customers use to deploy and secure compute and AI workloads at the edge.',
-        'Accountable for top-level KPIs and revenue; lead and scale a distributed org of product managers and developer-relations professionals.',
+        'Accountable for top-level KPIs and revenue; lead a distributed org of product managers and own the developer-relations function for Golioth and the edge portfolio.',
       ],
     },
     {
@@ -60,6 +60,7 @@ export const profile = {
         'Founded and led the company through exit, owning all product, engineering, and go-to-market while growing a fully distributed team to 23 across five countries.',
         'Raised $8M+ and managed full P&L — budgets, headcount, investor reporting, and runway across multiple fundraising cycles.',
         'Defined the architecture connecting constrained devices to the cloud — managed connectivity, OTA, and data pipelines — the substrate increasingly central to Edge and Physical AI.',
+        'Built the developer-relations function from zero: SDKs, documentation, tutorials, and community programs, the adoption engine across the embedded and edge developer ecosystem.',
         'Structured partnerships across leading semiconductor vendors, then negotiated and closed the acquisition and led integration. Member of the Zephyr Project Technical Steering Committee.',
       ],
     },
