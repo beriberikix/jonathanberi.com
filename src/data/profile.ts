@@ -12,7 +12,7 @@ export const profile = {
     org: 'Canonical',
     href: 'https://canonical.com',
   },
-  founderLine: 'Founder & CEO of Golioth — acquired by Canonical',
+  founderLine: 'Founder & CEO of Golioth, acquired by Canonical',
   location: 'San Francisco, California',
   headshot: {
     webp: '/img/jonathanberi_headshot.webp',
@@ -22,9 +22,9 @@ export const profile = {
 
   // Short executive summary (generalized — no single-vendor framing).
   summary: [
-    'Product and platform executive — and a venture-backed founder with one exit — with nearly two decades of product leadership, including 15 years building the systems that bring AI to the physical edge: from silicon and embedded compute to connectivity, fleet deployment, and inference on constrained devices.',
+    'Product and platform executive (and venture-backed founder with one exit) with nearly two decades of product leadership, including 15 years building the systems that bring AI to the physical edge: from silicon and embedded compute to connectivity, fleet deployment, and inference on constrained devices.',
     'I founded and scaled Golioth from zero to acquisition, raising $8M+ to build the developer platform that turns connected-hardware prototypes into deployed products. Developers are in my DNA, and I love open source.',
-    'I’m a hands-on AI practitioner, not just a strategist: I build with the modern AI stack daily — running inference on constrained edge hardware, building MCP servers and agentic skills, and writing embedded tooling.',
+    'I’m a hands-on AI practitioner, not just a strategist. I build with the modern AI stack daily: running inference on constrained edge hardware, building MCP servers and agentic skills, and writing embedded tooling.',
   ],
 
   // Scannable metric cards — the proof, not a résumé table.
@@ -40,26 +40,26 @@ export const profile = {
     {
       org: 'Canonical',
       role: 'Head of Product, IoT',
-      period: '2026 — now',
+      period: '2026 – now',
       current: true,
       href: 'https://canonical.com',
-      lede: 'Leading global product strategy for the embedded and edge portfolio — the OS layer beneath much of the edge-AI ecosystem.',
+      lede: 'Leading global product strategy for the embedded and edge portfolio, the OS layer beneath much of the edge-AI ecosystem.',
       points: [
-        'Own product across Ubuntu Core, Ubuntu Pro for Devices, and Golioth — the foundation customers use to deploy and secure compute and AI workloads at the edge.',
+        'Own product across Ubuntu Core, Ubuntu Pro for Devices, and Golioth, the foundation customers use to deploy and secure compute and AI workloads at the edge.',
         'Accountable for top-level KPIs and revenue; lead a distributed org of product managers and own the developer-relations function for Golioth and the edge portfolio.',
       ],
     },
     {
       org: 'Golioth',
       role: 'Founder & CEO',
-      period: '2020 — 2026',
+      period: '2020 – 2026',
       note: 'Acquired by Canonical',
       href: 'https://golioth.io',
-      lede: 'Built the developer platform for connected hardware and Edge AI — from zero to acquisition.',
+      lede: 'Built the developer platform for connected hardware and Edge AI, from zero to acquisition.',
       points: [
         'Founded and led the company through exit, owning all product, engineering, and go-to-market while growing a fully distributed team to 23 across five countries.',
-        'Raised $8M+ and managed full P&L — budgets, headcount, investor reporting, and runway across multiple fundraising cycles.',
-        'Defined the architecture connecting constrained devices to the cloud — managed connectivity, OTA, and data pipelines — the substrate increasingly central to Edge and Physical AI.',
+        'Raised $8M+ and managed full P&L: budgets, headcount, investor reporting, and runway across multiple fundraising cycles.',
+        'Defined the architecture connecting constrained devices to the cloud: managed connectivity, OTA, and data pipelines, the substrate increasingly central to Edge and Physical AI.',
         'Built the developer-relations function from zero: SDKs, documentation, tutorials, and community programs, the adoption engine across the embedded and edge developer ecosystem.',
         'Structured partnerships across leading semiconductor vendors, then negotiated and closed the acquisition and led integration. Member of the Zephyr Project Technical Steering Committee.',
       ],
@@ -67,21 +67,21 @@ export const profile = {
     {
       org: 'Particle',
       role: 'Senior Product Manager',
-      period: '2017 — 2019',
+      period: '2017 – 2019',
       href: 'https://particle.io',
       lede: 'Owned the embedded device platform for one of the most widely adopted edge-hardware developer ecosystems.',
       points: [
-        'Shipped Particle Mesh, Particle Workbench, Device OS 1.0 (embedded RTOS), and new mobile apps — from silicon selection to developer-facing C++ APIs.',
+        'Shipped Particle Mesh, Particle Workbench, Device OS 1.0 (embedded RTOS), and new mobile apps, from silicon selection to developer-facing C++ APIs.',
       ],
     },
     {
       org: 'Google / Nest',
       role: 'Product Manager',
-      period: '2011 — 2017',
+      period: '2011 – 2017',
       href: 'https://github.com/openthread/openthread',
       lede: 'Edge platform work across networking protocols, embedded platforms, and open-source developer ecosystems.',
       points: [
-        'Led product for Thread, OpenThread, and Weave — and launched Nest’s first open-source initiative, OpenThread, now the default Thread stack for the Matter standard.',
+        'Led product for Thread, OpenThread, and Weave, and launched Nest’s first open-source initiative, OpenThread, now the default Thread stack for the Matter standard.',
         'Represented Alphabet/Google/Nest as an alternate Board member of the Thread Group.',
       ],
     },
@@ -89,12 +89,12 @@ export const profile = {
 
   // De-emphasized earlier roles — a compact, structured list.
   earlier: [
-    { org: 'WeWork', role: 'Product, Core Platform', period: '2019 — 2020' },
-    { org: 'Magento', role: 'Senior Technical PM', period: '2010 — 2011' },
+    { org: 'WeWork', role: 'Product, Core Platform', period: '2019 – 2020' },
+    { org: 'Magento', role: 'Senior Technical PM', period: '2010 – 2011' },
     {
       org: 'MySpace',
-      role: 'Senior PM — early OpenID Connect / OAuth2',
-      period: '2008 — 2010',
+      role: 'Senior PM, early OpenID Connect / OAuth2',
+      period: '2008 – 2010',
     },
   ],
 
@@ -114,8 +114,8 @@ export const profile = {
 
   // Light single-line recognition list.
   recognition: [
-    { label: 'Fellow, Conduit Venture Labs', detail: '2023 — now' },
-    { label: 'Board of Directors, Thread Group', detail: '2016 — 2017' },
+    { label: 'Fellow, Conduit Venture Labs', detail: '2023 – now' },
+    { label: 'Board of Directors, Thread Group', detail: '2016 – 2017' },
     { label: 'Technical Steering & Marketing Committees, Zephyr Project' },
     { label: 'Author, Make: JavaScript Robotics', detail: 'Maker Media / O’Reilly' },
     { label: 'Frequent speaker on embedded, edge & developer platforms' },
@@ -123,7 +123,7 @@ export const profile = {
 
   // Personality, not self-deprecation.
   beyond: [
-    'Off the clock I’m a maker and roboticist — the habit behind Make: JavaScript Robotics, and a workbench that never sits idle.',
+    'Off the clock I’m a maker and roboticist: it’s the habit behind Make: JavaScript Robotics, and a workbench that never sits idle.',
     'B.S. in Computer Science & Business Administration, University of Southern California.',
   ],
 
