@@ -22,8 +22,9 @@ export const profile = {
 
   // Short executive summary (generalized — no single-vendor framing).
   summary: [
-    'Product and platform executive — and a venture-backed founder with one exit — with 15+ years building the systems that bring AI to the physical edge: from silicon and embedded compute to connectivity, fleet deployment, and inference on constrained devices.',
+    'Product and platform executive — and a venture-backed founder with one exit — with nearly two decades of product leadership, including 15 years building the systems that bring AI to the physical edge: from silicon and embedded compute to connectivity, fleet deployment, and inference on constrained devices.',
     'I founded and scaled Golioth from zero to acquisition, raising $8M+ to build the developer platform that turns connected-hardware prototypes into deployed products. Developers are in my DNA, and I love open source.',
+    'I’m a hands-on AI practitioner, not just a strategist: I build with the modern AI stack daily — running inference on constrained edge hardware, building MCP servers and agentic skills, and writing embedded tooling.',
   ],
 
   // Scannable metric cards — the proof, not a résumé table.
@@ -121,7 +122,7 @@ export const profile = {
 
   // Personality, not self-deprecation.
   beyond: [
-    'Off the clock I’m a maker and roboticist, and I keep a small lab of computing experiments running — embedded tooling, inference engines, MCP servers, and agentic skills.',
+    'Off the clock I’m a maker and roboticist — the habit behind Make: JavaScript Robotics, and a workbench that never sits idle.',
     'B.S. in Computer Science & Business Administration, University of Southern California.',
   ],
 
