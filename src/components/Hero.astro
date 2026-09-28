@@ -3,7 +3,7 @@ import { profile } from '../data/profile';
 import SignalField from './SignalField.astro';
 import SiteNav from './SiteNav.astro';
 
-const { tagline, kicker, focusAreas, currentRole, founderLine, location, headshot, links } =
+const { name, tagline, kicker, focusAreas, currentRole, founderLine, location, headshot, links } =
   profile;
 ---
 
@@ -15,12 +15,12 @@ const { tagline, kicker, focusAreas, currentRole, founderLine, location, headsho
 
     <div class="hero__grid">
       <div class="hero__copy">
-        <p class="kicker">
-          <span class="kicker__role">{kicker}</span>
-          <span class="kicker__focus">{focusAreas.join('  ·  ')}</span>
-        </p>
+        <div class="kicker">
+          <h1 class="kicker__role">{name} · {kicker}</h1>
+          <p class="kicker__focus">{focusAreas.join('  ·  ')}</p>
+        </div>
 
-        <h1 class="hero__statement">{tagline}</h1>
+        <p class="hero__statement">{tagline}</p>
 
         <div class="hero__role">
           <a class="hero__role-now" href={currentRole.href} target="_blank" rel="noopener"
@@ -39,9 +39,9 @@ const { tagline, kicker, focusAreas, currentRole, founderLine, location, headsho
           </span>
 
           <ul class="hero__links" aria-label="Profiles">
-            <li><a href={links.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>
-            <li><a href={links.github} target="_blank" rel="noopener">GitHub</a></li>
-            <li><a href={links.bluesky} target="_blank" rel="noopener">Bluesky</a></li>
+            <li><a href={links.linkedin} target="_blank" rel="me noopener">LinkedIn</a></li>
+            <li><a href={links.github} target="_blank" rel="me noopener">GitHub</a></li>
+            <li><a href={links.bluesky} target="_blank" rel="me noopener">Bluesky</a></li>
           </ul>
         </div>
       </div>
@@ -92,6 +92,12 @@ const { tagline, kicker, focusAreas, currentRole, founderLine, location, headsho
     gap: 0.4rem;
     margin-bottom: 1.4rem;
   }
+  /* The h1 reads as a small kicker line; the tagline below is the visual headline. */
+  .kicker__role {
+    font: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+  }
   .kicker__focus {
     display: block;
     color: var(--ink-faint);
@@ -100,8 +106,11 @@ const { tagline, kicker, focusAreas, currentRole, founderLine, location, headsho
   }
 
   .hero__statement {
+    font-family: var(--font-display);
     font-size: var(--step-4);
     font-weight: 460;
+    line-height: 1.05;
+    text-wrap: balance;
     letter-spacing: -0.025em;
     max-width: 16ch;
   }

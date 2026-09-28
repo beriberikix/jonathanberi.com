@@ -184,6 +184,8 @@ picture {
 
 .section__label {
   font-family: var(--font-mono);
+  font-weight: 400;
+  line-height: 1.6;
   font-size: var(--step--1);
   letter-spacing: 0.16em;
   text-transform: uppercase;

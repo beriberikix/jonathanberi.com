@@ -6,14 +6,14 @@ const { competencies, recognition } = profile;
 <section class="section" id="focus" aria-label="Focus and recognition">
   <div class="shell focus__grid">
     <div class="focus__col reveal">
-      <p class="section__label">What I do</p>
+      <h2 class="section__label">What I do</h2>
       <ul class="chips">
         {competencies.map((c) => <li class="chip">{c}</li>)}
       </ul>
     </div>
 
     <div class="focus__col reveal" style="--reveal-delay: 120ms">
-      <p class="section__label">Board, advisory &amp; recognition</p>
+      <h2 class="section__label">Board, advisory &amp; recognition</h2>
       <ul class="rec">
         {
           recognition.map((r) => (
