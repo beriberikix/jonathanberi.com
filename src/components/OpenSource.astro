@@ -1,0 +1,145 @@
+---
+import { opensource } from '../data/opensource';
+import { getRepoMeta, resolveRepo, statLine } from '../lib/github';
+
+const meta = await getRepoMeta();
+const { intro, orgs, repos } = opensource;
+
+interface Card {
+  name: string;
+  href: string;
+  role: string;
+  blurb: string;
+  stat: string;
+}
+
+const cards: Card[] = [
+  ...orgs
+    .filter((o) => o.featured)
+    .map((o) => ({ name: o.name, href: o.href, role: o.role, blurb: o.blurb, stat: '' })),
+  ...repos
+    .filter((r) => r.featured)
+    .map((entry) => {
+      const r = resolveRepo(entry.repo, meta, entry);
+      return { name: r.name, href: r.href, role: r.role, blurb: r.blurb, stat: statLine(r) };
+    }),
+];
+---
+
+<section class="section" id="open-source" aria-label="Open source">
+  <div class="shell">
+    <p class="section__label">Open source</p>
+    <p class="lede oss__intro reveal">{intro}</p>
+
+    <ul class="oss__grid reveal" style="--reveal-delay: 120ms">
+      {
+        cards.map((c) => (
+          <li class="oss__card">
+            <a class="oss__link" href={c.href} target="_blank" rel="noopener">
+              <span class="oss__role">{c.role}</span>
+              <span class="oss__name">{c.name}</span>
+              <span class="oss__blurb">{c.blurb}</span>
+              {c.stat && <span class="oss__stat">{c.stat}</span>}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <a class="oss__all reveal" href="/open-source">All projects →</a>
+  </div>
+</section>
+
+<style>
+  .oss__intro {
+    margin-bottom: var(--space-m);
+  }
+
+  .oss__grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .oss__card {
+    background: var(--surface);
+    transition: background 0.2s ease;
+  }
+  .oss__card:hover {
+    background: var(--bg-tint);
+  }
+  .oss__link {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: clamp(1.1rem, 3vw, 1.6rem);
+  }
+  .oss__role {
+    align-self: flex-start;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    background: var(--accent-soft);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+  }
+  .oss__name {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    line-height: 1.15;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+  .oss__card:hover .oss__name {
+    color: var(--accent);
+  }
+  .oss__blurb {
+    font-size: var(--step--1);
+    color: var(--ink-soft);
+    text-wrap: pretty;
+  }
+  .oss__stat {
+    margin-top: auto;
+    padding-top: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+  }
+
+  .oss__all {
+    display: inline-block;
+    margin-top: var(--space-m);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    padding: 0.6rem 1.3rem;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .oss__all:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    .oss__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .oss__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

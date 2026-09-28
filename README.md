@@ -20,14 +20,22 @@ npm run preview # serve the built dist/ locally
 
 All site copy and links live in one place: `src/data/profile.ts`. Edit that file to change the tagline, summary, highlights, experience, and contact links. The components under `src/components/` read from it and rarely need to change for a content update.
 
+### Open source
+
+Open source projects live in `src/data/opensource.ts`. They appear in the Open source section on the home page (entries marked `featured`) and in full on `/open-source`, in two groups: organizations and communities, then libraries and tools by theme. Adding a library takes one line: its `owner/name` and a theme. Repos outside your own account can set a `role` (e.g. Contributor), which is shown as a tag.
+
+At build time, `src/lib/github.ts` fetches stars, language, description, and last push from the GitHub API, using one paginated call per owner. A curated `blurb` overrides the GitHub description. If the fetch fails, the build still succeeds and entries render without stats, so give featured repos a `blurb`. Set `GITHUB_TOKEN` to raise the API rate limit. The deploy workflow passes it in and also rebuilds weekly so the counts stay fresh.
+
 ## Project layout
 
 ```
 src/
   data/profile.ts     single source of truth for site copy and links
   layouts/Base.astro  HTML shell, meta tags, Open Graph, theme bootstrap
-  pages/              index.astro and 404.astro
-  components/         hero, highlights, experience, focus, footer, theme toggle
+  data/opensource.ts  curated open source projects
+  lib/github.ts       build-time GitHub repo stats
+  pages/              index.astro, open-source.astro and 404.astro
+  components/         hero, site nav, highlights, experience, open source, focus, footer, theme toggle
   styles/global.css   design tokens and base styles, light and dark themes
 public/               static assets copied as-is: favicons, headshot, CNAME, robots.txt
 scripts/gen-favicon.mjs  one-off generator for favicon.svg, favicon.ico and icon.png

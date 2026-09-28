@@ -1,0 +1,333 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import { opensource } from '../data/opensource';
+import { getRepoMeta, resolveRepo, statLine } from '../lib/github';
+
+const meta = await getRepoMeta();
+const { intro, themes, orgs, repos } = opensource;
+
+// Stars first, then most recently pushed.
+const byTheme = themes
+  .map((t) => ({
+    ...t,
+    items: repos
+      .filter((r) => r.theme === t.id)
+      .map((r) => resolveRepo(r.repo, meta, r))
+      .sort(
+        (a, b) =>
+          (b.stars ?? 0) - (a.stars ?? 0) || (b.pushedAt ?? '').localeCompare(a.pushedAt ?? '')
+      ),
+  }))
+  .filter((t) => t.items.length);
+---
+
+<Base
+  title="Open source · Jonathan Beri"
+  description="Open source libraries, tools, and communities from Jonathan Beri: Zephyr RTOS libraries and board ports, provisioning, USB and probe tooling, simulation, and AI agent tooling."
+>
+  <header class="page-head">
+    <div class="shell page-head__inner">
+      <SiteNav class="page-head__nav" />
+      <p class="section__label">Open source</p>
+      <h1 class="page-head__title">Libraries, tools &amp; communities.</h1>
+      <p class="lede">{intro}</p>
+      <nav class="jump" aria-label="Jump to a topic">
+        {
+          byTheme.map((t) => (
+            <a class="jump__chip" href={`#${t.id}`}>
+              {t.label}
+              <span class="jump__count">{t.items.length}</span>
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section section--tight" aria-labelledby="orgs">
+      <div class="shell">
+        <h2 class="section__label" id="orgs">Organizations &amp; communities</h2>
+        <ul class="orgs reveal">
+          {
+            orgs.map((o) => (
+              <li class="org">
+                <span class="org__who">
+                  <a class="org__name" href={o.href} target="_blank" rel="noopener">{o.name}</a>
+                  <span class="org__role">{o.role}</span>
+                </span>
+                <span class="org__blurb">
+                  {o.blurb}
+                  {o.links && (
+                    <span class="org__links">
+                      {o.links.map((l) => (
+                        <a href={l.href} target="_blank" rel="noopener">{l.label}</a>
+                      ))}
+                    </span>
+                  )}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--tight" aria-labelledby="libraries">
+      <div class="shell">
+        <h2 class="section__label" id="libraries">Libraries &amp; tools</h2>
+        {
+          byTheme.map((t) => (
+            <div class="theme reveal" id={t.id}>
+              <h3 class="theme__label">
+                {t.label}
+                <span class="theme__count">{t.items.length}</span>
+              </h3>
+              <ul class="cells">
+                {t.items.map((r) => (
+                  <li class="cell">
+                    <div class="cell__head">
+                      <a class="cell__name" href={r.href} target="_blank" rel="noopener">
+                        {r.name}
+                      </a>
+                      {r.role !== 'Author' && <span class="tag">{r.role}</span>}
+                      {r.archived && <span class="tag tag--muted">archived</span>}
+                      <span class="cell__stat">{statLine(r)}</span>
+                    </div>
+                    {r.blurb && <p class="cell__blurb">{r.blurb}</p>}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .page-head {
+    background: linear-gradient(180deg, var(--bg-tint), var(--bg));
+    border-bottom: 1px solid var(--line);
+  }
+  .page-head__inner {
+    padding-block: clamp(1.4rem, 3vw, 2rem) clamp(2.5rem, 6vw, 4rem);
+  }
+  .page-head__nav {
+    margin-bottom: clamp(2.5rem, 7vw, 4.5rem);
+  }
+  .page-head__title {
+    font-size: var(--step-4);
+    letter-spacing: -0.025em;
+    margin-bottom: 1.2rem;
+  }
+
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: var(--space-m);
+  }
+  .jump__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--step--1);
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+    background: var(--surface);
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .jump__chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .jump__count,
+  .theme__count {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+  }
+
+  .section--tight {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  /* section__label is styled for <p>; normalize it as a heading. */
+  h2.section__label {
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    background: var(--accent-soft);
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .tag--muted {
+    color: var(--ink-faint);
+    background: var(--bg-tint);
+  }
+
+  /* Organizations: one compact row each. */
+  .orgs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .org {
+    display: grid;
+    grid-template-columns: 13rem 1fr;
+    align-items: baseline;
+    gap: 0.25rem 1.5rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .org:last-child {
+    border-bottom: none;
+  }
+  .org__who {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .org__name {
+    font-weight: 600;
+    color: var(--ink);
+    transition: color 0.2s ease;
+  }
+  .org__name:hover {
+    color: var(--accent);
+  }
+  .org__blurb {
+    font-size: var(--step--1);
+    color: var(--ink-soft);
+    text-wrap: pretty;
+  }
+  .org__links {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0 0.8rem;
+    margin-left: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+  }
+  .org__links a {
+    color: var(--accent-ink);
+  }
+  .org__links a:hover {
+    text-decoration: underline;
+  }
+  .org__role {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+  }
+
+  /* Libraries: theme label on the left, a dense two-column grid on the right. */
+  .theme {
+    display: grid;
+    grid-template-columns: 13rem 1fr;
+    gap: 0.5rem 1.5rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 1.5rem;
+  }
+  .theme:first-of-type {
+    border-top: none;
+    padding-top: 0;
+  }
+  .theme__label {
+    font-size: var(--step-0);
+    font-weight: 500;
+    line-height: 1.3;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    align-self: start;
+    position: sticky;
+    top: 1.5rem;
+  }
+
+  .cells {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 2rem;
+  }
+  .cell {
+    padding: 0.55rem 0;
+    border-bottom: 1px dashed var(--line);
+    min-width: 0;
+  }
+  .cell__head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.2rem 0.5rem;
+  }
+  .cell__name {
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+    transition: color 0.2s ease;
+  }
+  .cell__name:hover {
+    color: var(--accent);
+  }
+  .cell__stat {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+  .cell__blurb {
+    margin-top: 0.15rem;
+    font-size: 0.86rem;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+  }
+
+  @media (max-width: 860px) {
+    .theme {
+      grid-template-columns: 1fr;
+    }
+    .theme__label {
+      position: static;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+  }
+  @media (max-width: 640px) {
+    .cells {
+      grid-template-columns: 1fr;
+    }
+    .org {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
