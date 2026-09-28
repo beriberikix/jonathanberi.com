@@ -1,9 +1,9 @@
 ---
 import { profile } from '../data/profile';
 import SignalField from './SignalField.astro';
-import ThemeToggle from './ThemeToggle.astro';
+import SiteNav from './SiteNav.astro';
 
-const { name, tagline, kicker, focusAreas, currentRole, founderLine, location, headshot, links } =
+const { tagline, kicker, focusAreas, currentRole, founderLine, location, headshot, links } =
   profile;
 ---
 
@@ -11,12 +11,7 @@ const { name, tagline, kicker, focusAreas, currentRole, founderLine, location, h
   <SignalField />
 
   <div class="shell hero__inner">
-    <nav class="hero__nav">
-      <a class="wordmark" href="/">
-        <span class="wordmark__dot"></span>{name}
-      </a>
-      <ThemeToggle />
-    </nav>
+    <SiteNav class="hero__nav" />
 
     <div class="hero__grid">
       <div class="hero__copy">
@@ -77,27 +72,7 @@ const { name, tagline, kicker, focusAreas, currentRole, founderLine, location, h
   }
 
   .hero__nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     margin-bottom: clamp(2.5rem, 9vw, 6rem);
-  }
-
-  .wordmark {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: var(--font-mono);
-    font-size: var(--step--1);
-    letter-spacing: 0.04em;
-    color: var(--ink);
-  }
-  .wordmark__dot {
-    width: 0.55rem;
-    height: 0.55rem;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 0 4px var(--accent-soft);
   }
 
   .hero__grid {

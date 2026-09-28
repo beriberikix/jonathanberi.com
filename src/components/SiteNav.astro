@@ -1,0 +1,39 @@
+---
+// Wordmark + theme toggle, shared by every page's header.
+import { profile } from '../data/profile';
+import ThemeToggle from './ThemeToggle.astro';
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<nav class:list={['site-nav', className]} {...rest}>
+  <a class="wordmark" href="/">
+    <span class="wordmark__dot"></span>{profile.name}
+  </a>
+  <ThemeToggle />
+</nav>
+
+<style>
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+  .wordmark__dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+</style>
