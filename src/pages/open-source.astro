@@ -4,7 +4,11 @@ import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
 import { opensource } from '../data/opensource';
 import { getRepoMeta, resolveRepo, statLine } from '../lib/github';
+import { openSourceSchema } from '../lib/schema';
 
+const description =
+  'Open source libraries, tools, and communities from Jonathan Beri: Zephyr RTOS libraries and board ports, provisioning, USB and probe tooling, simulation, and AI agent tooling.';
+const jsonLd = await openSourceSchema(description);
 const meta = await getRepoMeta();
 const { intro, themes, orgs, repos } = opensource;
 
@@ -23,10 +27,7 @@ const byTheme = themes
   .filter((t) => t.items.length);
 ---
 
-<Base
-  title="Open source · Jonathan Beri"
-  description="Open source libraries, tools, and communities from Jonathan Beri: Zephyr RTOS libraries and board ports, provisioning, USB and probe tooling, simulation, and AI agent tooling."
->
+<Base title="Open source · Jonathan Beri" {description} ogType="website" {jsonLd}>
   <header class="page-head">
     <div class="shell page-head__inner">
       <SiteNav class="page-head__nav" />
@@ -81,10 +82,10 @@ const byTheme = themes
         {
           byTheme.map((t) => (
             <div class="theme reveal" id={t.id}>
-              <h3 class="theme__label">
-                {t.label}
-                <span class="theme__count">{t.items.length}</span>
-              </h3>
+              <div class="theme__label">
+                <h3 class="theme__title">{t.label}</h3>
+                <span class="theme__count">{t.items.length} {t.items.length === 1 ? 'project' : 'projects'}</span>
+              </div>
               <ul class="cells">
                 {t.items.map((r) => (
                   <li class="cell">
@@ -158,12 +159,6 @@ const byTheme = themes
 
   .section--tight {
     padding-block: clamp(2.5rem, 6vw, 4.5rem);
-  }
-
-  /* section__label is styled for <p>; normalize it as a heading. */
-  h2.section__label {
-    font-weight: 400;
-    line-height: 1.6;
   }
 
   .tag {
@@ -251,10 +246,12 @@ const byTheme = themes
     border-top: none;
     padding-top: 0;
   }
-  .theme__label {
+  .theme__title {
     font-size: var(--step-0);
     font-weight: 500;
     line-height: 1.3;
+  }
+  .theme__label {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;

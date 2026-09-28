@@ -10,5 +10,5 @@
 # TECHNOLOGY COLOPHON
 
     Astro, HTML5, CSS3
-    Fraunces, Inter & IBM Plex Mono (Google Fonts)
+    Newsreader, Inter & IBM Plex Mono (Google Fonts)
     Deployed on GitHub Pages

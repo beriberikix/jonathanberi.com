@@ -14,6 +14,7 @@ export const profile = {
   },
   founderLine: 'Founder & CEO of Golioth, acquired by Canonical',
   location: 'San Francisco, California',
+  education: { name: 'University of Southern California', href: 'https://www.usc.edu' },
   headshot: {
     webp: '/img/jonathanberi_headshot.webp',
     jpg: '/img/jonathanberi_headshot.jpg',

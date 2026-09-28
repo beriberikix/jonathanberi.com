@@ -1,19 +1,31 @@
 ---
 import '../styles/global.css';
+import { profile } from '../data/profile';
 
 interface Props {
   title?: string;
   description?: string;
+  /** 'profile' for pages about Jonathan, 'website' for everything else. */
+  ogType?: 'profile' | 'website';
+  /** Schema.org objects, each rendered as its own ld+json block. */
+  jsonLd?: object[];
+  /** Keep the page out of search indexes (e.g. 404). */
+  noindex?: boolean;
 }
 
 const {
   title = 'Jonathan Beri · Product & Strategy Executive',
   description =
     'Jonathan Beri, product and platform executive and venture-backed founder (1x exit). Head of Product, IoT at Canonical; founder & CEO of Golioth. Building the systems that bring AI to the physical edge.',
+  ogType = 'profile',
+  jsonLd = [],
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const ogImage = new URL('/img/jonathanberi_headshot.jpg', Astro.site).href;
+const ogImage = new URL('/img/og-card.jpg', Astro.site).href;
+const ogImageAlt = `${profile.name}: ${profile.tagline}`;
+const [firstName, ...rest] = profile.name.split(' ');
 ---
 
 <!doctype html>
@@ -23,18 +35,41 @@ const ogImage = new URL('/img/jonathanberi_headshot.jpg', Astro.site).href;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    <meta name="author" content={profile.name} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
     <!-- Open Graph / social -->
-    <meta property="og:type" content="profile" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    {
+      ogType === 'profile' && (
+        <>
+          <meta property="profile:first_name" content={firstName} />
+          <meta property="profile:last_name" content={rest.join(' ')} />
+        </>
+      )
+    }
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+
+    <!-- Structured data -->
+    {
+      jsonLd.map((d) => (
+        <script type="application/ld+json" set:html={JSON.stringify(d).replace(/</g, '\\u003c')} />
+      ))
+    }
 
     <!-- Icons & manifest -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
